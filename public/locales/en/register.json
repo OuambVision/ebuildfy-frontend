@@ -1,0 +1,20 @@
+{
+  "register.title": "Create your account",
+  "register.message": "Create your account manually",
+  "register.question": "Already have an account?",
+  "register.login": "Login here",
+  "register.name": "Name",
+  "register.username": "Username",
+  "register.email": "Email",
+  "register.password": "Password",
+  "register.confirmPassword": "Confirm Password",
+  "register.create": "Create account",
+  "register.error": "Invalid email or password.",
+  "register.invalidEmail": "Invalid email.",
+  "register.required": "This field is required.",
+  "register.or": "or",
+  "register.tooShort": "Name is too short",
+  "register.minLength": "Minimum 8 characters",
+  "register.passwordsDoNotMatch": "Passwords do not match",
+  "register.creating": "Creating account…"
+}

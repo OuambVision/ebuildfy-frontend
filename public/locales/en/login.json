@@ -1,0 +1,18 @@
+{
+  "login.title": "Welcome back to your app!",
+  "login.message": "Use your account to continue.",
+  "login.question": "Don’t have an account?",
+  "login.email": "Email",
+  "login.password": "Password",
+  "login.login": "Login",
+  "login.signIn": "Sign in",
+  "login.forgotPassword": "Forgot password?",
+  "login.error": "Invalid email or password.",
+  "login.signUp": "Sign up",
+  "login.or": "or",
+  "login.google": "Continue with",
+  "login.required": "This field is required.",
+  "login.invalidEmail": "Please enter a valid email address.",
+  "login.minLength": "Minimum 8 characters",
+  "login.signingIn": "Signing in…"
+}

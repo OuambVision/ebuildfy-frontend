@@ -1,0 +1,20 @@
+{
+  "register.title": "Créez votre compte",
+  "register.message": "Créez votre compte manuellement",
+  "register.question": "Vous avez déjà un compte ?",
+  "register.login": "Connectez-vous",
+  "register.name": "Nom",
+  "register.username": "Nom d'utilisateur",
+  "register.email": "E-mail",
+  "register.password": "Mot de passe",
+  "register.confirmPassword": "Confirmer le mot de passe",
+  "register.create": "Créer un compte",
+  "register.error": "E-mail ou mot de passe invalide.",
+  "register.invalidEmail": "E-mail invalide.",
+  "register.required": "Ce champ est requis.",
+  "register.or": "ou",
+  "register.tooShort": "Le nom est trop court",
+  "register.minLength": "Minimum 8 caractères",
+  "register.passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+  "register.creating": "Création du compte…"
+}

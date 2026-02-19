@@ -1,0 +1,16 @@
+{
+  "login.title": "Stay connected with your community and enjoy or share a wide range of services.",
+  "login.message": "Sign in to your account",
+  "login.question": "Don’t have an account?",
+  "login.sign_up": "Sign up",
+  "login.email": "Email",
+  "login.password": "Password",
+  "login.submit": "Sign in",
+  "login.forgot_password": "Forgot password?",
+  "login.error": "Invalid email or password.",
+  "login.signup": "Sign up",
+  "login.about": "About us",
+  "login.privacy": "Privacy Policy",
+  "login.contact": "Contact",
+  "login.footer": "Made with ❤️ for you."
+}
