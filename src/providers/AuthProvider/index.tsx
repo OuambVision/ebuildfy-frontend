@@ -14,6 +14,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             try {
                 setLoading(true);
                 const user = await getMe();
+                console.log("Fetched user:", user);
                 if (user) setUser(user);
             } finally {
                 setLoading(false);
