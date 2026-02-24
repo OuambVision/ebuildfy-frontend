@@ -11,6 +11,9 @@ export default function ProductMain({
     product,
     setProduct,
     setSaveProduct,
+    page,
+    search,
+    limit,
 }: any) {
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -49,6 +52,9 @@ export default function ProductMain({
                                 product={product}
                                 setProduct={setProduct}
                                 setSaveProduct={setSaveProduct}
+                                page={page}
+                                search={search}
+                                limit={limit}
                             />
                         )
                     }

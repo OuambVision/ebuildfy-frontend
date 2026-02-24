@@ -86,13 +86,22 @@ export default function CreateVariantForm({
     /* ---------------- VALIDATION ---------------- */
 
     const validate = () => {
+        //title is required
         if (!title.trim()) {
             titleRef.current?.focus();
             return false;
         }
 
+        //price and inventory must be positive numbers
         if (!price || Number(price) < 0) return false;
         if (!inventory || Number(inventory) < 0) return false;
+
+        //check if all options are selected
+        for (const vt of selectedVariantTypes) {
+            if (!selectedOptions[vt.id]) {
+                return false;
+            }
+        }
 
         return true;
     };

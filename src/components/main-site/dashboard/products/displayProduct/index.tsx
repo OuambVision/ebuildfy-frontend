@@ -117,6 +117,9 @@ export default function ProductPageClient({
                 product={product}
                 setProduct={setProduct}
                 setSaveProduct={setSaveProduct}
+                page={page}
+                search={search}
+                limit={limit}
             />
 
             <RelatedProducts product={product} setProduct={setProduct} />

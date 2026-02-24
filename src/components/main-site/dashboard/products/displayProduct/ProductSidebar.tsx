@@ -3,17 +3,15 @@
 
 import { useShopLoader, useShopCategories } from "@/hooks";
 import { useShopStore } from "@/store";
-import { Tooltip } from "@/components/ui/custom";
-import Button from "@/components/ui/custom/Button";
 import Checkbox from "@/components/ui/custom/Checkbox";
 import Select, { Option } from "@/components/ui/custom/Select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import RelatedProducts from "./RelatedProducts";
 
 export default function ProductSidebar({ product, setProduct }: any) {
-    const shops = useShopStore((state) => state.shops);
-    const shop = shops.find((s) => s.active);
+    const activeShopId = useShopStore((s) => s.activeShopId);
     const { data: categories, isLoading } = useShopCategories({
-        shopId: String(shop?.id),
+        shopId: activeShopId || "",
     });
 
     const [selectedCategory, setSelectedCategory] = useState<Option | null>(
@@ -25,26 +23,35 @@ export default function ProductSidebar({ product, setProduct }: any) {
             : null
     );
 
-    // Transformer les categories en options pour le Select
-    const categoryOptions: Option[] = [
-        { id: "", label: "Select a value" },
-        ...(categories?.map((cat: any) => ({
-            id: cat.id,
-            label: cat.title,
-        })) || []),
-    ];
+    const [categoryOptions, setCategoryOptions] = useState<Option[]>([]);
 
+    //To transform categories into options for the select, with a placeholder
+    useEffect(() => {
+        if (categories) {
+            const options: Option[] = [
+                { id: "", label: "Select a value" },
+                ...categories.map((cat: any) => ({
+                    id: cat.id,
+                    label: cat.title,
+                })),
+            ];
+            setCategoryOptions(options);
+        }
+    }, [categories]);
+
+    // When categories are loaded, set the selected category based on the product's categories
     const handleCategoryChange = (option: Option | null) => {
         setSelectedCategory(option);
         setProduct((prev: any) => ({
             ...prev,
+            relatedProducts: [], // reset related products when category changes
             categories: categories.filter((cat: any) => cat.id === option?.id),
         }));
     };
 
-    // ✅ Hook custom pour loader + skeleton
+    // Loader while fetching categories
     const loader = useShopLoader({
-        conditions: [isLoading, !shop],
+        conditions: [isLoading, !activeShopId],
     });
     if (loader) return loader;
 
@@ -59,17 +66,10 @@ export default function ProductSidebar({ product, setProduct }: any) {
                         value={selectedCategory}
                         onChange={handleCategoryChange}
                         placeholder="Select a value"
+                        menuPosition={
+                            window.innerWidth < 1024 ? "top" : "bottom"
+                        } // top on mobile, bottom on desktop
                     />
-                    {/* Bouton + pour créer un nouveau produit */}
-                    <Tooltip content="Add new Category" position="top">
-                        <Button
-                            type="button"
-                            className="ml-3 px-2 py-0.5"
-                            variant="primary"
-                        >
-                            +
-                        </Button>
-                    </Tooltip>
                 </div>
             </div>
 
@@ -82,6 +82,7 @@ export default function ProductSidebar({ product, setProduct }: any) {
                             isFeatured: e.target.checked ? true : null,
                         }));
                     }}
+                    checked={product.isFeatured || false}
                 />
                 Feature this product on the homepage
             </label>

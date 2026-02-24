@@ -51,7 +51,7 @@ export default function DashboardHeader({
     };
 
     return (
-        <header className="h-14 border-b bg-main-700 flex items-center justify-between px-3 md:px-4 text-white relative">
+        <header className="h-14 border-b bg-main-700 flex items-center justify-between px-3 md:px-4 text-white text-sm relative">
             {/* Hamburger mobile */}
             <button
                 className="md:hidden flex items-center justify-center p-2 rounded-md hover:bg-main-600 cursor-pointer"
@@ -86,7 +86,10 @@ export default function DashboardHeader({
                     }
                     menuClassName="p-2 text-black"
                 >
-                    <DropdownItem className="bg-main-50 hover:bg-main-700 hover:text-white rounded-md flex justify-between items-center">
+                    <DropdownItem
+                        className="bg-main-50 hover:bg-main-700 hover:text-white rounded-md flex justify-between items-center"
+                        href="/dashboard"
+                    >
                         <div className="flex items-center gap-2">
                             <ShopBadge name={activeShop?.name || "My Shop"} />
                             {activeShop?.name}
@@ -100,7 +103,7 @@ export default function DashboardHeader({
                         className="hover:bg-main-700 hover:text-white rounded-md my-2"
                     >
                         <Store className="h-4 w-4" />
-                        Toutes les boutiques
+                        All Shops
                     </DropdownItem>
 
                     <div className="border-t" />
@@ -120,7 +123,7 @@ export default function DashboardHeader({
                         onClick={handleLogout}
                     >
                         <LogOut className="h-4 w-4 text-red-600" />
-                        Se déconnecter
+                        <span>Log out</span>
                     </DropdownItem>
                 </Dropdown>
             </div>

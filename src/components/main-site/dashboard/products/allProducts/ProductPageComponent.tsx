@@ -40,8 +40,6 @@ export default function ProductsPageComponent({
 
     if (loader) return loader;
 
-    console.log("shops", shops);
-
     return (
         <ProductsClient
             {...products}

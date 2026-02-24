@@ -4,8 +4,9 @@
 import { updateProductInShop } from "@/services";
 import { useToast } from "@/providers/ToastProvider";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { useShopOptionTypes } from "@/hooks";
-import { useDrawerStore } from "@/store";
+import { useDrawerStore, useShopStore } from "@/store";
 import CreateVariantForm from "@/components/main-site/dashboard/forms/CreateVariantForm";
 import CreateVariantTypeForm from "@/components/main-site/dashboard/forms/CreateVariantTypeForm";
 import { Tooltip } from "@/components/ui/custom";
@@ -20,11 +21,19 @@ export default function MultipleOptions({
     product,
     setProduct,
     setSaveProduct,
+    page,
+    search,
+    limit,
 }: {
     product?: any;
     setProduct: React.Dispatch<React.SetStateAction<any>>;
     setSaveProduct: React.Dispatch<React.SetStateAction<any>>;
+    page: string;
+    search: string;
+    limit: string;
 }) {
+    const queryClient = useQueryClient();
+    const activeShopId = useShopStore((s) => s.activeShopId);
     const { data: optionTypes } = useShopOptionTypes();
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
@@ -69,6 +78,15 @@ export default function MultipleOptions({
                         );
                         setProduct(updatedProduct);
                         setSaveProduct(updatedProduct);
+                        queryClient.invalidateQueries({
+                            queryKey: [
+                                "shop-products",
+                                activeShopId,
+                                parseInt(page),
+                                search,
+                                parseInt(limit),
+                            ],
+                        });
                     }}
                 />
             ),
@@ -90,6 +108,15 @@ export default function MultipleOptions({
                         setProduct(updatedProduct);
                         setSaveProduct(updatedProduct);
                         setVariantOptions(updatedProduct.variantOptions || []);
+                        queryClient.invalidateQueries({
+                            queryKey: [
+                                "shop-products",
+                                activeShopId,
+                                parseInt(page),
+                                search,
+                                parseInt(limit),
+                            ],
+                        });
                     }}
                 />
             ),

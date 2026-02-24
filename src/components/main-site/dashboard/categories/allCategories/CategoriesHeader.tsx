@@ -39,6 +39,9 @@ export default function CategoriesHeader({
                 limit,
             ],
         });
+        // queryClient.invalidateQueries({
+        //     queryKey: ["shop-categories", activeShopId],
+        // });
         router.replace(`/dashboard/categories/${categorie.doc.id}`);
         setCreating(false);
     };
@@ -67,6 +70,9 @@ export default function CategoriesHeader({
                         search,
                         limit,
                     ],
+                });
+                queryClient.invalidateQueries({
+                    queryKey: ["shop-categories", activeShopId],
                 });
                 toast.success("Categories deleted successfully");
             } catch (error) {

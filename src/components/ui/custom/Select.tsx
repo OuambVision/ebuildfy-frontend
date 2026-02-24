@@ -67,7 +67,10 @@ export default function Select({
     const activeBg = isDark ? "bg-neutral-800" : "bg-neutral-100";
 
     return (
-        <div ref={containerRef} className={cn("relative w-full", className)}>
+        <div
+            ref={containerRef}
+            className={cn("relative w-full z-50", className)}
+        >
             {label && (
                 <label className="block mb-1 text-sm font-medium">
                     {label}
@@ -105,7 +108,7 @@ export default function Select({
                             : "mb-1 bottom-full"
                     )}
                 >
-                    {options.map((opt) => (
+                    {options?.map((opt) => (
                         <button
                             key={opt.id}
                             type="button"

@@ -51,6 +51,9 @@ export default function ProductHeader({
                         parseInt(limit),
                     ],
                 });
+                queryClient.invalidateQueries({
+                    queryKey: ["all-shop-products", activeShopId],
+                });
                 setProduct(data.doc);
                 setSaveProduct(data.doc);
                 setIsSaving(false);

@@ -2,6 +2,7 @@
 
 import Providers from "@/providers";
 import Header from "@/components/main-site/header";
+import GlobalDrawer from "@/components/common/drawer/GlobalDrawer";
 import { usePathname } from "next/navigation";
 import { playfair } from "@/libs/fonts";
 import "./globals.css";
@@ -32,6 +33,7 @@ export default function RootLayout({
                     <main className={`${isPaddingNeeded ? "pt-20" : null}`}>
                         {children}
                     </main>
+                    <GlobalDrawer />
                 </Providers>
             </body>
         </html>

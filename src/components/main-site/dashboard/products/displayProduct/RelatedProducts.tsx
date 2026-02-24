@@ -4,24 +4,16 @@
 import { useAllShopProducts } from "@/hooks";
 import { useShopStore } from "@//store";
 import Select, { Option } from "@/components/ui/custom/Select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RelatedProducts({ product, setProduct }: any) {
-    const shops = useShopStore((state) => state.shops);
-    const shop = shops.find((s) => s.active);
+    const activeShopId = useShopStore((s) => s.activeShopId);
+    const { data: products } = useAllShopProducts({
+        shopId: activeShopId || "",
+    });
 
-    const { data: products } = useAllShopProducts({ shopId: String(shop?.id) });
-
-    // get products with same category as the current product to show as options in the select
-    const relatedProducts =
-        products?.filter(
-            (p: any) =>
-                p.categories[0]?.id === product?.categories[0]?.id &&
-                p.id !== product?.id
-        ) || [];
-
-    const productOptions: Option[] =
-        relatedProducts?.map((p: any) => ({ id: p.id, label: p.title })) || [];
+    const [relatedProducts, setRelatedProducts] = useState<Option[]>([]);
+    const [productOptions, setProductOptions] = useState<Option[]>([]);
 
     const [selectedProducts, setSelectedProducts] = useState<Option[]>(
         product?.relatedProducts?.map((rp: any) => ({
@@ -30,13 +22,28 @@ export default function RelatedProducts({ product, setProduct }: any) {
         })) || []
     );
 
-    // const handleCreateProduct = () => {
-    //   const title = prompt('Enter new product name:')
-    //   if (title) {
-    //     const newProduct = { id: crypto.randomUUID(), label: title }
-    //     setSelectedProducts([...selectedProducts, newProduct])
-    //   }
-    // }
+    useEffect(() => {
+        const relatedProd = products?.filter(
+            (p: any) =>
+                p.categories[0]?.id === product?.categories[0]?.id &&
+                p.id !== product?.id
+        );
+        setRelatedProducts(relatedProd);
+        setProductOptions(
+            relatedProd?.map((p: any) => ({
+                id: p.id,
+                label: p.title,
+            }))
+        );
+        setSelectedProducts(
+            product?.relatedProducts?.map((rp: any) => ({
+                id: rp.id,
+                label: rp.title,
+            })) || []
+        );
+    }, [products, product]);
+
+    if (productOptions?.length === 0) return null;
 
     return (
         <div className="space-y-2 w-full border-t pt-4 text-sm border-gray-400">
@@ -66,17 +73,6 @@ export default function RelatedProducts({ product, setProduct }: any) {
                         placeholder="Select a product"
                         className="w-auto"
                     />
-                    {/* Bouton + pour créer un nouveau produit */}
-                    {/* <Tooltip content="Add new Product" position="top">
-            <Button
-              type="button"
-              onClick={handleCreateProduct}
-              className="ml-3 px-2 py-0.5"
-              variant="primary"
-            >
-              +
-            </Button>
-          </Tooltip> */}
                 </div>
                 {/* Input affichant les produits sélectionnés */}
                 <div className="flex flex-wrap gap-1 flex-1">

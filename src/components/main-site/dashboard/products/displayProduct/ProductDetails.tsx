@@ -10,10 +10,16 @@ export default function ProductDetails({
     product,
     setProduct,
     setSaveProduct,
+    page,
+    search,
+    limit,
 }: {
     product?: any;
     setProduct: React.Dispatch<React.SetStateAction<any>>;
     setSaveProduct: React.Dispatch<React.SetStateAction<any>>;
+    page: string;
+    search: string;
+    limit: string;
 }) {
     const [hasOptions, setHasOptions] = useState(
         product?.enableVariants || false
@@ -40,6 +46,9 @@ export default function ProductDetails({
                     product={product}
                     setProduct={setProduct}
                     setSaveProduct={setSaveProduct}
+                    page={page}
+                    search={search}
+                    limit={limit}
                 />
             ) : (
                 <SingleOption product={product} setProduct={setProduct} />
