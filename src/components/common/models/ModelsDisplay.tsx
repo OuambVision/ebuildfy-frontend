@@ -100,7 +100,7 @@ export default function ModelsDisplay({
                             {/* Bouton visualiser au centre */}
                             <button
                                 onClick={() => setSelectedTemplate(template)}
-                                className="absolute flex items-center justify-center bg-main-400 bg-opacity-30 text-white font-bold px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer opacity-100 sm:opacity-0"
+                                className="text-sm absolute flex items-center justify-center bg-main-400 bg-opacity-30 text-white font-bold px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer opacity-100 sm:opacity-0"
                             >
                                 Voir le modèle
                             </button>
