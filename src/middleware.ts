@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
+    console.log("COOKIES HEADER:", req.headers.get("cookie"));
     try {
         // 1. Call backend to verify:
         // - user logged in (via httpOnly cookie)
@@ -20,7 +21,7 @@ export async function middleware(req: NextRequest) {
 
         // 2. If backend request fails (invalid token, user not logged in, etc.)
         if (!res.ok) {
-            console.log("Authentication check failed with status:");
+            console.log("Authentication check failed");
             return NextResponse.redirect(new URL("/login", req.url));
         }
 
