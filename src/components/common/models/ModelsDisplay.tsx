@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { BsCircleFill } from "react-icons/bs";
+import { ImMobile } from "react-icons/im";
+import { IoIosDesktop } from "react-icons/io";
 
 import { updateShop } from "@/services";
 import { useShopStore } from "@/store";
@@ -27,6 +29,7 @@ export default function ModelsDisplay({
 }: {
     templates: Template[];
 }) {
+    const [isIframeMobileView, setIsIframeMobileView] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
         null
     );
@@ -60,6 +63,14 @@ export default function ModelsDisplay({
             setSelectedTemplate(null);
         } finally {
             hideLoading();
+        }
+    };
+
+    const toggleIframeView = (mode: String) => {
+        if (mode === "mobile") {
+            setIsIframeMobileView(true);
+        } else if (mode === "desktop") {
+            setIsIframeMobileView(false);
         }
     };
 
@@ -126,10 +137,25 @@ export default function ModelsDisplay({
                     onClick={() => setSelectedTemplate(null)}
                 >
                     <div
-                        className="relative w-full max-w-5xl h-[80vh] bg-transparent rounded-lg overflow-hidden"
+                        className="relative w-full max-w-6xl h-[80vh] bg-transparent rounded-lg overflow-hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="w-full flex justify-end z-10 bg-main-100">
+                        <div className="w-full flex justify-between items-center z-10 bg-main-100">
+                            <div className="text-main-700 font-bold flex items-center gap-2 ml-2">
+                                <button
+                                    className={`p-1 cursor-pointer ${isIframeMobileView ? "bg-main-500 text-white" : null} rounded-full`}
+                                    onClick={() => toggleIframeView("mobile")}
+                                >
+                                    <ImMobile className="w-4 h-4" />
+                                </button>
+                                <button
+                                    className={`p-1 cursor-pointer ${!isIframeMobileView ? "bg-main-500 text-white" : null} rounded-full`}
+                                    onClick={() => toggleIframeView("desktop")}
+                                >
+                                    <IoIosDesktop className="w-4 h-4" />
+                                </button>
+                            </div>
+
                             <button
                                 onClick={() => setSelectedTemplate(null)}
                                 className="z-10 p-2 cursor-pointer"
@@ -141,7 +167,7 @@ export default function ModelsDisplay({
 
                         <iframe
                             src={selectedTemplate.demoUrl}
-                            className="w-full h-full"
+                            className={`h-full border-0 ${isIframeMobileView ? "w-[360px]" : "w-full"} mx-auto mt-2 rounded-lg shadow-lg`}
                             title={selectedTemplate.name}
                         ></iframe>
                         <button
