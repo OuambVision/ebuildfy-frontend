@@ -18,16 +18,21 @@ export async function middleware(req: NextRequest) {
             }
         );
 
-        const result = await res.json();
-
-        console.log("Middleware result:", result);
-
         // 2. If backend request fails (invalid token, user not logged in, etc.)
-        if (result.error) {
+        if (!res.ok) {
+            console.log("Authentication check failed with status:");
             return NextResponse.redirect(new URL("/login", req.url));
         }
 
-        // 3. Check shop onboarding
+        // 3. Read JSON response
+        const result = await res.json();
+
+        // 4. Additional security (backend returns an error)
+        if (!result || result.error) {
+            return NextResponse.redirect(new URL("/login", req.url));
+        }
+
+        // 5. Check shop onboarding
         const onboarding = result.activeShopOnboarding;
 
         if (
