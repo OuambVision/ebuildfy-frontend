@@ -18,6 +18,8 @@ export async function middleware(req: NextRequest) {
             }
         );
 
+        console.log("Middleware response status:", res);
+
         // 2. If backend request fails (invalid token, user not logged in, etc.)
         if (!res.ok) {
             return NextResponse.redirect(new URL("/login", req.url));
