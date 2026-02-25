@@ -18,7 +18,9 @@ export async function middleware(req: NextRequest) {
             }
         );
 
-        console.log("Middleware response status:", res);
+        const tempResult = await res.json();
+        // console.log("Middleware response status:", res);
+        console.log("Middleware response body:", tempResult);
 
         // 2. If backend request fails (invalid token, user not logged in, etc.)
         if (!res.ok) {
