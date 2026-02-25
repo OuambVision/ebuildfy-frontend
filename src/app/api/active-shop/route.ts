@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+    console.log("Cookie in client api", req.headers.get("cookie"));
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/active-shop`,

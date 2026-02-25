@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
+    console.log("Cookie in middleware", req.headers.get("cookie"));
     try {
         // 🔥 appel local → même domaine → cookies toujours présents
         const res = await fetch(`${req.nextUrl.origin}/api/active-shop`, {
