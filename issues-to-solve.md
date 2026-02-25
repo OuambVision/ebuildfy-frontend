@@ -1,1 +1,0 @@
-- apres avoir ajouter un variant type ou variant option a un produit, il faut actualiser la page des produits afin de voir la modif. Donc pb de mise a jour cote frontend (OK)

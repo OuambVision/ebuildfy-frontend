@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    console.log("Cookie in client api", req.headers.get("cookie"));
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/active-shop`,
             {
                 method: "GET",
                 headers: {
-                    // 🔥 forward cookie proprement
+                    //forward cookie proprement
                     Cookie: req.headers.get("cookie") || "",
                 },
                 cache: "no-store",
@@ -19,7 +18,6 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json(data, { status: res.status });
     } catch (error) {
-        console.error("Proxy error:", error);
         return NextResponse.json({ error: "Proxy error" }, { status: 500 });
     }
 }
