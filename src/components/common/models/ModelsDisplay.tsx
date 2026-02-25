@@ -180,7 +180,7 @@ export default function ModelsDisplay({
                                     );
                                 }
                             }}
-                            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-main-500 hover:bg-main-600 px-3 py-2 font-bold rounded text-white cursor-pointer  text-base md:text-lg"
+                            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-main-500 hover:bg-main-600 px-3 py-2 font-bold rounded text-white cursor-pointer  text-sm"
                         >
                             Choisir ce modèle
                         </button>
