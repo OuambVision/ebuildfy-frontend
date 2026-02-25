@@ -22,8 +22,6 @@ export function ShopHydratorProvider({ children }: { children: ReactNode }) {
                 const shops = await getMyShops(String(user.id));
                 setShops(shops);
 
-                console.log("Fetched shops:", shops);
-
                 // Set active shop if not set
                 const activeShop = shops.find((s: Shop) => s.active);
                 setActiveShopId(activeShop?.id ?? null);
